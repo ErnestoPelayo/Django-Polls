@@ -6,6 +6,7 @@ from django.http import Http404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone 
+from django.views.generic.edit import CreateView
 
 # Create your views here.
 
@@ -47,3 +48,8 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+        
+
+class QuestionCreate(CreateView):
+    model = Question
+    fields = ['question_text','pub_date']

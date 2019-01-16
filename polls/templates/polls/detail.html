@@ -1,51 +1,43 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <meta charset="utf-8">
-    <title>My Results for Questions {{question.question_text}}</title>
-  
+{% extends "polls/base_page.html" %}
 {% load static %}
-
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-  
-  </head>
-    <body>
-        <header>
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">About</h4>
-              <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-            </div>
-                     </div>
-        </div>
-      </div>
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
-               <img src="/static/polls/images/dj.png" style="height:40px;width:40px" ></img>
-            <strong>Django </strong>
-          </a>
-        
-        </div>
-      </div>
-    </header>  
-    </body>
-</html>
+{% block title %}   <title> {{question.question_text}}</title> {% endblock %}
 
+{% block content %}
+ <section class="jumbotron text-center" style=" height:850px">
+<br>
+<br>
+<br>
+<center>
+     {% block text %}  <h1>Vote for your favorite </h1>       {% endblock %}
+    
+    <br>
+    <br>
+<h3>{{ question.question_text }}</h3>
 
-
-
-<h1>{{ question.question_text }}</h1>
-
+ <br>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'polls:vote' question.id %}" method="post">
+<table>
+    <tr >
+        <td>
+            
+          <form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
 {% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <input class="btn btn-secondary" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
 {% endfor %}
-<input type="submit" value="Vote">
-</form>
+<input type="submit" value="Vote" class="btn btn-secondary" style= "width:150px">
+</form>  
+            
+            
+        </td>
+    </tr>
+</table>
+
+</center>
+{% endblock %}
+
+
+

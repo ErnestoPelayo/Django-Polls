@@ -1,59 +1,28 @@
+{% extends "polls/base_page.html" %}
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>My first project in Django</title>
-  
-{% load static %}
+ {% block title %}  <title>My first project in Django</title> {% endblock %}
+{% block content %}
+  {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-  
-  </head>
-  <body>
-<header>
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">About</h4>
-              <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-            </div>
-                     </div>
-        </div>
-      </div>
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
-               <img src="/static/polls/images/dj.png" style="height:40px;width:40px" ></img>
-            <strong>Django </strong>
-          </a>
-        
-        </div>
-      </div>
-    </header>  
-
-            
 <main role="main">
 
-      <section class="jumbotron text-center" style=" height:700px">
+      <section class="jumbotron text-center" style=" height:850px">
         <div class="container">
           <h1 class="jumbotron-heading">Example of Django Framework</h1>
           <br>
-          <img src="/static/polls/images/dj.png" style="align:MIDDLE;" ></img>
-          <br>
+          <img src="/static/polls/images/dj.png" ></img>
           <br>
           <br>
           <p class="lead text-muted">New to Django? Or to Web development in general? Well, you came to the right place: read this material to quickly get up and running</p>
       
         </div>
         <br>
-     
+        <br>
 <center>
 <table>
     <tr>
         <td>
-            
             <div class="container">
          {% if latest_question_list %}
     <ul>
@@ -70,22 +39,35 @@
     </tr>
 </table>
 </center>
+<br>
+<br>
+
+<form action="/polls/add_question.html" method="post">{% csrf_token %}
+     {{ form.as_p }}
+<input type="submit" value="Add Question" class="btn btn-secondary" style= "width:150px">
+<input type="submit" value="Add Choice" class="btn btn-secondary" style= "width:150px">
+
+</form>  
+
+
       </section>
-    </main>
-    
-<footer class="text-muted">
-      <div class="container">
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
-        <p>Polls example is © Django Tutorial, for beginner!</p>
-        
-      </div>
-    </footer>
+      
+{% endblock %}
 
-  </body>
-</html>
+<!-- 
 
+Esto es un comentario 
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input class="btn btn-secondary" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% endfor %}
+<input type="submit" value="Vote" class="btn btn-secondary" style= "width:150px">
+</form>  
+
+-->
 
 
 
