@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 <main role="main">
 
-      <section class="jumbotron text-center" style=" height:850px">
+      <section class="jumbotron text-center" >
         <div class="container">
           <h1 class="jumbotron-heading">Example of Django Framework</h1>
           <br>
@@ -20,7 +20,7 @@
         <br>
         <br>
 <center>
-<table>
+<table style ="height:100%">
     <tr>
         <td>
             <div class="container">
@@ -41,33 +41,18 @@
 </center>
 <br>
 <br>
-
-<form action="/polls/add_question.html" method="post">{% csrf_token %}
-     {{ form.as_p }}
-<input type="submit" value="Add Question" class="btn btn-secondary" style= "width:150px">
-<input type="submit" value="Add Choice" class="btn btn-secondary" style= "width:150px">
-
-</form>  
+<a  class="btn btn-secondary" href="{% url add_question'} " style= "width:150px">Add Question</a>
+<a  class="btn btn-secondary" href="{% url 'add_question'} " style= "width:150px">Add Choice</a>
 
 
       </section>
       
+      
+      
+      
 {% endblock %}
 
-<!-- 
 
-Esto es un comentario 
-
-<form action="{% url 'polls:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <input class="btn btn-secondary" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-{% endfor %}
-<input type="submit" value="Vote" class="btn btn-secondary" style= "width:150px">
-</form>  
-
--->
 
 
 

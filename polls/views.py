@@ -10,6 +10,9 @@ from django.views.generic.edit import CreateView
 
 # Create your views here.
 
+def question(request):
+    return HttpResponse('add_question.html')
+    
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
@@ -48,8 +51,5 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
-        
 
-class QuestionCreate(CreateView):
-    model = Question
-    fields = ['question_text','pub_date']
+
