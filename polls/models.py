@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from django.utils import timezone
+from django.urls import reverse
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
@@ -14,8 +15,10 @@ class Question(models.Model):
         was_published_recently.boolean = True
         was_published_recently.short_description = 'Published recently ?'
         
-        def get_absolute_url(self):
-            return reverse('question_text', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+            return reverse("polls:index", kwargs={})
+            #return reverse("polls:detail", kwargs={'pk': self.pk})
+
     
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -23,5 +26,7 @@ class Choice(models.Model):
     votes = models.IntegerField(default=0)
     def __str__(self):
         return self.choice_text
+    def get_absolute_url(self):
+            return reverse("polls:index", kwargs={})
     
     

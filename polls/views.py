@@ -53,3 +53,13 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 
+class QuestionCreate(CreateView):
+    template_name='polls/create_question.html'
+    model = Question
+    fields = ['question_text','pub_date']
+    
+class ChoiceCreate(CreateView):
+    template_name='polls/create_choice.html'
+    model = Choice
+    fields = ['question','choice_text','votes']
+    
