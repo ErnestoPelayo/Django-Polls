@@ -17,7 +17,14 @@
                <img src="/static/polls/images/dj.png" style="height:40px;width:40px" ></img>
             <strong>Django </strong>
           </a>
-        
+        {% if user.is_authenticated %}
+         <li class="navbar-brand d-flex align-items-center">User: {{ user.get_username }}</li>
+    
+     <li><a href="{% url 'logout'%}?next=" class="btn btn-danger">Logout</a></li>   
+   
+   {% else %}
+     <li><a href="{% url 'login'%}?next=/polls" class="btn btn-light" >Login</a></li>   
+   {% endif %} 
         </div>
       </div>
     </header>  
@@ -26,7 +33,7 @@
     <main>
           {% block content %}
   
-               {% endblock %}
+          {% endblock %}
     </main>
   
   
