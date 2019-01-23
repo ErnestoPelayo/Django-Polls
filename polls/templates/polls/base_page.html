@@ -1,49 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-         {% block title %} <title>My first project in Django</title>  {% endblock %}
-  
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-  
+   {% load static %}
+   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+   <title>
+         {% block title %} 
+         My first project in Django    
+         {% endblock %}
+   </title>
   </head>
   <body>
-<header>
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="/polls" class="navbar-brand d-flex align-items-center">
+    <header>
+          <div class="navbar navbar-dark bg-dark box-shadow">
+            <div class="container d-flex justify-content-between">
+              <a href="/polls" class="navbar-brand d-flex align-items-center">
                <img src="/static/polls/images/dj.png" style="height:40px;width:40px" ></img>
-            <strong>Django </strong>
-          </a>
-        {% if user.is_authenticated %}
-         <li class="navbar-brand d-flex align-items-center">User: {{ user.get_username }}</li>
-    
-     <li><a href="{% url 'logout'%}?next=" class="btn btn-danger">Logout</a></li>   
-   
-   {% else %}
-     <li><a href="{% url 'login'%}?next=/polls" class="btn btn-light" >Login</a></li>   
-   {% endif %} 
-        </div>
-      </div>
-    </header>  
-    
-    
-    <main>
-          {% block content %}
+              <strong>Django </strong>
+              </a>
+            {% if user.is_authenticated %}
+                      <li class="navbar-brand d-flex align-items-center">User: {{ user.get_username }}</li>
+                      <li><a href="{% url 'logout'%}?next=" class="btn btn-danger">Logout</a></li>   
+            {% else %}
+                      <li><a href="{% url 'login'%}?next=/polls" class="btn btn-success">Login</a></li>   
+ 
+            {% endif %} 
+            </div>
+          </div>
+    </header>
+            <section class="jumbotron text-center" style="height: 850px; margin:0px" >
+            {% block content_page %}
   
-          {% endblock %}
-    </main>
-  
-  
-  <footer class="text-muted" style="position: fixed; left: 0; bottom: 0;width: 100%;text-align: center;">
-      <div class="container">
+            {% endblock %}
+            </section>
+           <footer class="text-muted" style=" padding:10px;left: 0; bottom: 0;width: 100%;text-align: center;height: 10px">
+            <div class="container">
+            <p>Polls example is © Django Tutorial, for beginner!</p>
+            </div>
         
-        <p>Polls example is © Django Tutorial, for beginner!</p>
-        
-      </div>
-    </footer>
-    
-</body>
+   </body>
+
+
     

@@ -1,35 +1,24 @@
 {% extends "polls/base_page.html" %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-{% block title %}   <title>My Results for Questions {{question.question_text}}</title> {% endblock %}   
+
+{% block title %}   
+My Results for Questions {{question.question_text}}
+{% endblock %}   
 
 
-  {% block content %}
-   <section class="jumbotron text-center" style=" height:850px">
-  <br>
-  <br>
-   <center>
-     <h1>Result for all options</h1>
-  <table>
-    <tr>
-      <td>
-        <br>
-        <br>
-        <h1>{{ question.question_text }}</h1>
+{% block content_page %}
+ 
+      <h1>
+                Result for all options {{ question.question_text }}
+            </h1>
+    <div style="padding:50px">
+            {% for choice in question.choice_set.all %}
+                    <li>
+                        {{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}
+                    </li>
+            {% endfor %}
 
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
-<br>
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
-
-      </td>
-    </tr>
-  </table>
- </center>
-</section>
+           <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+    </div>
 {% endblock %}
 
 

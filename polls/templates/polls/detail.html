@@ -1,42 +1,32 @@
 {% extends "polls/base_page.html" %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-{% block title %}   <title> {{question.question_text}}</title> {% endblock %}
+            {% block title %}  
+            {{question.question_text}} 
+            {% endblock %}
 
-{% block content %}
- <section class="jumbotron text-center" style=" height:850px">
-<br>
-<br>
-<br>
-<center>
-     {% block text %}  <h1>Vote for your favorite </h1>       {% endblock %}
-    
-    <br>
-    <br>
-<h3>{{ question.question_text }}</h3>
+{% block content_page %}
 
- <br>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+     {% block text %}  
+     <h1>Vote for your favorite </h1>       
+     {% endblock %}
+     
+        <h3>{{ question.question_text }}</h3>
+     {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+     {% endif %}
 
-<table>
-    <tr >
-        <td>
-            
 <form action="{% url 'polls:vote' question.id %}" method="post">
         {% csrf_token %}
+        
         {% for choice in question.choice_set.all %}
-        <input class="btn btn-secondary" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            <ul >
+                <input class="btn btn-secondary" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+             </ul>
         {% endfor %}
+   
         <input type="submit" value="Vote" class="btn btn-secondary" style= "width:150px">
 </form>  
             
-            
-        </td>
-    </tr>
-</table>
-
-</center>
 {% endblock %}
 
 

@@ -1,22 +1,15 @@
 {% extends "polls/base_page.html" %}
 
- {% block title %}  <title> Add Choice </title> {% endblock %}
+ {% block title %}  
+                 Add Choice 
+ {% endblock %}
 
-{% block content %}
+{% block content_page %}
 
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-
-<br>
-<br>
-<center>
 <form method = "post"> {% csrf_token %}
     {{ form.as_p }}
-    <input type = "submit" value = "Save" >
+    <input type = "submit" value = "Save" class="btn btn-success" style="width : 80px" >
 </form>
-</center>
 
 {% endblock %}
 
-<!-- 

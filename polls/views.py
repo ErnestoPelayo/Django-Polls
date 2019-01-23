@@ -7,13 +7,17 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone 
 from django.views.generic.edit import CreateView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import permission_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import permission_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
-def question(request):
-    return HttpResponse('add_question.html')
-    
-class IndexView(generic.ListView):
+class IndexView(LoginRequiredMixin,generic.ListView):
+    permission_required= 'polls.can_jump'
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
@@ -22,9 +26,10 @@ class IndexView(generic.ListView):
         Return the last five published questions (not including those set to be
         published in the future).
          """
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
-        
-class DetailView(generic.DetailView):
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:7]
+        #return Question.objects.filter.filter(borrower=self.request.user).filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+   
+class DetailView(LoginRequiredMixin,generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
     
@@ -34,7 +39,7 @@ class DetailView(generic.DetailView):
         """
         return Question.objects.filter(pub_date__lte =timezone.now())
 
-class ResultsView(generic.DetailView):
+class ResultsView(LoginRequiredMixin,generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
     
@@ -58,6 +63,10 @@ class QuestionCreate(CreateView):
     model = Question
     fields = ['question_text','pub_date']
     
+    @method_decorator(permission_required('polls.add_question'))
+    def dispatch(self, *args, **kwargs):
+                return super(QuestionCreate, self).dispatch(*args, **kwargs)
+                
 class ChoiceCreate(CreateView):
     template_name='polls/create_choice.html'
     model = Choice

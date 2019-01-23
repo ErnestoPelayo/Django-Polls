@@ -1,53 +1,41 @@
 {% extends "polls/base_page.html" %}
 
- {% block title %}  <title>My first project in Django</title> {% endblock %}
-{% block content %}
-  {% load static %}
+{% block title %}  
+    My first project in Django 
+{% endblock %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-<main role="main">
-
-      <section class="jumbotron text-center" >
-        <div class="container">
-          <h1 class="jumbotron-heading">Example of Django Framework</h1>
-          <br>
-          <img src="/static/polls/images/dj.png" ></img>
-          <br>
-          <br>
-          <p class="lead text-muted">New to Django? Or to Web development in general? Well, you came to the right place: read this material to quickly get up and running</p>
-      
-        </div>
-        <br>
-        <br>
-<center>
-<table style ="height:100%">
-    <tr>
-        <td>
-            <div class="container">
-         {% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
-    
-        </div>
-        </td>
-    </tr>
-</table>
-</center>
-<br>
-<br>
-<a  class="btn btn-secondary" href="create_question" style= "width:150px">Add Question</a>
-<a  class="btn btn-secondary" href="create_choice" style= "width:150px">Add Choice</a>
-
-
-      </section>
-      
-      
+{% block content_page %}
+                        <div class="container">
+                            <h1 class="jumbotron-heading">
+                                Example of Django Framework
+                            </h1>
+                            <img src="/static/polls/images/dj.png" style='padding: 10px'></img>
+                        </div>
+                             <p class="lead text-muted" style='padding: 15px'>
+                                 New to Django? Or to Web development in general? Well, you came to the right place: read this material to quickly get up and running
+                          </p>
+                                        <div class="container">                            
+                                            <ul class="list-group" style='padding: 10px'>
+                                                {% if latest_question_list %}
+                                                    {% for question in latest_question_list %}
+                                                         <li class="list-group-item">
+                                                            <a href="/polls/{{ question.id }}/">{{ question.question_text }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                {% else %}
+                                                <p>No polls are available.</p>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                 {% if perms.polls.add_question %}                                    
+                        <div style='padding: 7px'>
+                        <a  class="btn btn-secondary" href="create_question" style= "width:150px">Add Question</a>
+                {% endif %} 
+                {% if perms.polls.add_choice %}
+                        <a  class="btn btn-secondary" href="create_choice" style= "width:150px">Add Choice</a>
+                        <div>
+                 {% endif %}   
+ 
 {% endblock %}
 
 
