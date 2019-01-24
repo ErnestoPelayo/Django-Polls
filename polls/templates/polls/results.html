@@ -9,7 +9,18 @@ My Results for Questions {{question.question_text}}
  
       <h1>
                 Result for all options {{ question.question_text }}
+  
+  
             </h1>
+  
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <ul {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</ul>
+    {% endfor %}
+</ul>
+{% endif %}
+
     <div style="padding:50px">
             {% for choice in question.choice_set.all %}
                     <li>
@@ -19,6 +30,10 @@ My Results for Questions {{question.question_text}}
 
            <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
     </div>
+    
+    
+  
+
 {% endblock %}
 
 

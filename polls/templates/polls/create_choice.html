@@ -6,7 +6,8 @@
 
 {% block content_page %}
 
-<form method = "post"> {% csrf_token %}
+<form method = "post"> 
+    {% csrf_token %}
     {{ form.as_p }}
     <input type = "submit" value = "Save" class="btn btn-success" style="width : 80px" >
 </form>

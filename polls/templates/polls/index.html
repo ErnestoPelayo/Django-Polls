@@ -1,3 +1,4 @@
+
 {% extends "polls/base_page.html" %}
 
 {% block title %}  
@@ -6,6 +7,17 @@
 
 {% block content_page %}
                         <div class="container">
+     {% if messages %}
+ 
+        <ul class="messages">
+            {% for message in messages %}
+               <ul class="p-3 mb-2 bg-danger text-white" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }} </ul>
+            {% endfor %}
+        </ul>
+
+    {% endif %}                            
+                            
+    
                             <h1 class="jumbotron-heading">
                                 Example of Django Framework
                             </h1>
@@ -25,17 +37,20 @@
                                                 {% else %}
                                                 <p>No polls are available.</p>
                                                 {% endif %}
-                                            </ul>
+                                                
+                                           </ul>
                                         </div>
-                 {% if perms.polls.add_question %}                                    
+                                        
+            {% if perms.polls.add_question %}                                    
                         <div style='padding: 7px'>
                         <a  class="btn btn-secondary" href="create_question" style= "width:150px">Add Question</a>
                 {% endif %} 
                 {% if perms.polls.add_choice %}
                         <a  class="btn btn-secondary" href="create_choice" style= "width:150px">Add Choice</a>
                         <div>
-                 {% endif %}   
- 
+                 {% endif %}
+                 
+
 {% endblock %}
 
 

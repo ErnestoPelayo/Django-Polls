@@ -1,8 +1,4 @@
-li a{
-     color: green;
-}
-
-body{
-    
-    background: white url("images/background.gif") no-repeat;
+#button_login {
+    width: 100px;
+    background-color: blue;
 }

@@ -3,6 +3,7 @@
   <head>
    {% load static %}
    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/polls/style.css' %}">
    <title>
          {% block title %} 
          My first project in Django    
@@ -27,16 +28,18 @@
             </div>
           </div>
     </header>
-            <section class="jumbotron text-center" style="height: 850px; margin:0px" >
+    
+    
+            <section class="jumbotron text-center" style="height: 900px; margin:0px" >
             {% block content_page %}
-  
             {% endblock %}
             </section>
+           
            <footer class="text-muted" style=" padding:10px;left: 0; bottom: 0;width: 100%;text-align: center;height: 10px">
             <div class="container">
             <p>Polls example is © Django Tutorial, for beginner!</p>
             </div>
-        
+            </footer>    
    </body>
 
 

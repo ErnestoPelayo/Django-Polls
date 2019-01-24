@@ -11,13 +11,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import permission_required
-from django.utils.decorators import method_decorator
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
 # Create your views here.
 
 class IndexView(LoginRequiredMixin,generic.ListView):
-    permission_required= 'polls.can_jump'
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
@@ -45,6 +44,7 @@ class ResultsView(LoginRequiredMixin,generic.DetailView):
     
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    messages.add_message(request, messages.WARNING, '.')
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
@@ -56,19 +56,25 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+      
 
-
-class QuestionCreate(CreateView):
+class QuestionCreate(SuccessMessageMixin,CreateView):
     template_name='polls/create_question.html'
     model = Question
     fields = ['question_text','pub_date']
+    success_message = " %(question_text)s  was created successfully"
     
     @method_decorator(permission_required('polls.add_question'))
     def dispatch(self, *args, **kwargs):
                 return super(QuestionCreate, self).dispatch(*args, **kwargs)
                 
-class ChoiceCreate(CreateView):
+ 
+class ChoiceCreate(SuccessMessageMixin,CreateView):
     template_name='polls/create_choice.html'
     model = Choice
     fields = ['question','choice_text','votes']
+    success_message = " %(choice_text)s  was created successfully"
     
+    @method_decorator(permission_required('polls.add_choice'))
+    def dispatch(self, *args, **kwargs):
+                return super(ChoiceCreate, self).dispatch(*args, **kwargs)
