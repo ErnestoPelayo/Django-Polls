@@ -1,7 +1,7 @@
 from django.test import TestCase
 import datetime
 from django.utils import timezone
-from .models import Question
+from .models import Question, Choice
 from django.urls import reverse
 
 # Create your tests here.
@@ -119,3 +119,18 @@ class QuestionDetailViewTests(TestCase):
         url = reverse('polls:detail', args=(past_question.id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
+        
+        
+
+class ChoiceTests(TestCase):
+    def test_(self):
+         pregunta = Question.objects.get(question_text="how are you?")
+         prueba= create_choices(pregunta, choice_text="perro")
+         self.assertContains(prueba,prueba.choice_text)
+        
+def create_choices(question_text,choice_text):
+    return Choice.objects.create(question_text=question_text,choice_text=choice_text)
+        
+ 
+    
+    

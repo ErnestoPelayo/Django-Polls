@@ -7,27 +7,16 @@
 
 {% block content_page %}
                         <div class="container">
-     {% if messages %}
- 
-        <ul class="messages">
-            {% for message in messages %}
-               <ul class="p-3 mb-2 bg-danger text-white" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }} </ul>
-            {% endfor %}
-        </ul>
-
-    {% endif %}                            
-                            
-    
                             <h1 class="jumbotron-heading">
                                 Example of Django Framework
                             </h1>
-                            <img src="/static/polls/images/dj.png" style='padding: 10px'></img>
+                            <img id="i_padding" src="/static/polls/images/dj.png"></img>
                         </div>
-                             <p class="lead text-muted" style='padding: 15px'>
+                             <p id="p_padding" class="lead text-muted" >
                                  New to Django? Or to Web development in general? Well, you came to the right place: read this material to quickly get up and running
                           </p>
-                                        <div class="container">                            
-                                            <ul class="list-group" style='padding: 10px'>
+                                        <div id="div_questions_view"  class="container">                            
+                                            <ul class="list-group" id="i_padding">
                                                 {% if latest_question_list %}
                                                     {% for question in latest_question_list %}
                                                          <li class="list-group-item">
@@ -42,11 +31,11 @@
                                         </div>
                                         
             {% if perms.polls.add_question %}                                    
-                        <div style='padding: 7px'>
-                        <a  class="btn btn-secondary" href="create_question" style= "width:150px">Add Question</a>
+                        <div id="div_buttons_create">
+                        <a id="btn_generic" class="btn btn-secondary" href="create_question">Add Question</a>
                 {% endif %} 
                 {% if perms.polls.add_choice %}
-                        <a  class="btn btn-secondary" href="create_choice" style= "width:150px">Add Choice</a>
+                        <a id="btn_generic" class="btn btn-secondary" href="create_choice" >Add Choice</a>
                         <div>
                  {% endif %}
                  

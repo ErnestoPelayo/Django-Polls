@@ -2,8 +2,9 @@
 <html lang="en" dir="ltr">
   <head>
    {% load static %}
+   <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/polls/style.css' %}">
+  
    <title>
          {% block title %} 
          My first project in Django    
@@ -15,31 +16,42 @@
           <div class="navbar navbar-dark bg-dark box-shadow">
             <div class="container d-flex justify-content-between">
               <a href="/polls" class="navbar-brand d-flex align-items-center">
-               <img src="/static/polls/images/dj.png" style="height:40px;width:40px" ></img>
+               <img id="img_size_logo" src="/static/polls/images/dj.png"></img>
               <strong>Django </strong>
               </a>
             {% if user.is_authenticated %}
                       <li class="navbar-brand d-flex align-items-center">User: {{ user.get_username }}</li>
-                      <li><a href="{% url 'logout'%}?next=" class="btn btn-danger">Logout</a></li>   
+                      <li><a id="button_log" href="{% url 'logout'%}?next=" class="btn btn-danger">Logout</a></li>   
             {% else %}
-                      <li><a href="{% url 'login'%}?next=/polls" class="btn btn-success">Login</a></li>   
- 
+                      <li><a id="button_log" href="{% url 'login'%}?next=/polls"  class="btn btn-success">Login</a></li>   
             {% endif %} 
             </div>
           </div>
     </header>
-    
-    
-            <section class="jumbotron text-center" style="height: 900px; margin:0px" >
+
+               <section id="section_base" class="jumbotron text-center">
+             {% if messages %}
+ 
+        <ul class="messages">
+            {% for message in messages %}
+               <ul class="p-3 mb-2 bg-danger text-white" {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }} </ul>
+            {% endfor %}
+            </ul>
+        {% endif %}    
+            
             {% block content_page %}
             {% endblock %}
             </section>
-           
-           <footer class="text-muted" style=" padding:10px;left: 0; bottom: 0;width: 100%;text-align: center;height: 10px">
+   
+      <div  id="div_footer">
+          <footer class="text-muted" >
             <div class="container">
             <p>Polls example is © Django Tutorial, for beginner!</p>
             </div>
-            </footer>    
+            </footer>
+          
+      </div>     
+               
    </body>
 
 

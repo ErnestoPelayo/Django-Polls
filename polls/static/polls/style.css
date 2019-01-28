@@ -1,4 +1,65 @@
-#button_login {
-    width: 100px;
-    background-color: blue;
+#btn_generic {
+   width:150px;
+}
+#i_padding{
+  padding: 10px;
+}
+#p_padding{
+    padding: 15px;
+}
+#div_buttons_create{
+  padding: 7px;
+}
+#img_size_logo{
+  height:40px;
+  width:40px;
+}
+#button_log{
+  width: 90px;
+}
+#button_log_index{
+  width: 150px;
+ }
+  
+#div_login_index{
+  width: 350px;
+  align-items: center;
+}
+#footer_muted{
+  padding:10px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 10px;
+}
+#div_results{
+  padding:50px;
+}
+#btn_save{
+  width : 100px;
+}
+#center_login{
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#div_questions_view{
+  width: 75%;
+}
+
+#section_base{
+  height: 850px;
+  width: 100%;
+  margin: 0px;
+}
+
+#div_footer{
+  padding:10px;
+  left: 0; 
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  height: 10px;
 }
